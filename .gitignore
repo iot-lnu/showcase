@@ -1,1 +1,4 @@
-gptapp/public/videos/
+public/videos/*
+public/thumbnails/*
+node_modules/
+package-lock.json

@@ -10,10 +10,11 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "electron": "^32.1.0"
+        "electron": "^32.1.1"
     },
     "dependencies": {
         "onoff": "^6.0.3",
         "video.js": "^8.12.0"
-    }
+    },
+    "keywords": []
 }
