@@ -1,0 +1,2 @@
+2024-09-18T13:52:44.473Z: Failed to initialize app: ReferenceError: setupAutoLaunch is not defined
+2024-09-18T13:52:44.517Z: Failed to load Home Assistant: Error: ERR_FAILED (-2) loading 'https://192.168.1.39:8123'

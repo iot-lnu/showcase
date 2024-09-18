@@ -156,36 +156,36 @@ function switchWindow() {
   }
 }
 
-function setupAutoLaunch() {
-  if (process.platform === 'linux') {
-    const homeDir = os.homedir();
-    const appDir = app.getAppPath();
-    const startScriptPath = path.join(appDir, 'start_app.sh');
-    const desktopEntryPath = path.join(homeDir, '.config', 'autostart', 'home-assistant-kiosk.desktop');
+// function setupAutoLaunch() {
+//   if (process.platform === 'linux') {
+//     const homeDir = os.homedir();
+//     const appDir = app.getAppPath();
+//     const startScriptPath = path.join(appDir, 'start_app.sh');
+//     const desktopEntryPath = path.join(homeDir, '.config', 'autostart', 'home-assistant-kiosk.desktop');
 
-    // Create start_app.sh
-    const startScriptContent = `#!/bin/bash
-      cd ${appDir}
-      npm run start-rpi`;
-    fs.writeFileSync(startScriptPath, startScriptContent);
-    fs.chmodSync(startScriptPath, '755');
+//     // Create start_app.sh
+//     const startScriptContent = `#!/bin/bash
+//       cd ${appDir}
+//       npm run start-rpi`;
+//     fs.writeFileSync(startScriptPath, startScriptContent);
+//     fs.chmodSync(startScriptPath, '755');
 
-    // Create desktop entry
-    const desktopEntryContent = `[Desktop Entry]
-Type=Application
-Name=Home Assistant Kiosk
-Exec=${startScriptPath}`;
+//     // Create desktop entry
+//     const desktopEntryContent = `[Desktop Entry]
+// Type=Application
+// Name=Home Assistant Kiosk
+// Exec=${startScriptPath}`;
     
-    if (!fs.existsSync(path.dirname(desktopEntryPath))) {
-      fs.mkdirSync(path.dirname(desktopEntryPath), { recursive: true });
-    }
-    fs.writeFileSync(desktopEntryPath, desktopEntryContent);
+//     if (!fs.existsSync(path.dirname(desktopEntryPath))) {
+//       fs.mkdirSync(path.dirname(desktopEntryPath), { recursive: true });
+//     }
+//     fs.writeFileSync(desktopEntryPath, desktopEntryContent);
 
-    console.log('Auto-launch setup completed');
-  } else {
-    console.log('Auto-launch setup is only supported on Linux');
-  }
-}
+//     console.log('Auto-launch setup completed');
+//   } else {
+//     console.log('Auto-launch setup is only supported on Linux');
+//   }
+// }
 
 app.whenReady().then(() => {
   session.defaultSession.setCertificateVerifyProc((request, callback) => {
@@ -194,9 +194,10 @@ app.whenReady().then(() => {
 
   createLocalAppWindow();
   createHomeAssistantWindow();
-  setupAutoLaunch();
+  // setupAutoLaunch();
 
-  globalShortcut.register('CommandOrControl+Tab', switchWindow);
+  // globalShortcut.register('CommandOrControl+Tab', switchWindow);
+  globalShortcut.register('Space', switchWindow);
 }).catch(error => {
   const errorMessage = `Failed to initialize app: ${error}`;
   console.error(errorMessage);

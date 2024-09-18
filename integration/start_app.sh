@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/iotlab/app_showcase
+cd $HOME/showcase/app
 npm run start-rpi
