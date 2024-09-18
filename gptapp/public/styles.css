@@ -1,0 +1,79 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin: 20px;
+}
+
+.header {
+    background-color: #ffe000; /* Couleur principale de l'Université de Kalmar */
+    color: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+.video-player {
+    width: 100%;
+    background: #000;
+}
+
+.video-js {
+    width: 100% !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important; /* Aspect ratio 16:9 */
+    position: relative !important;
+}
+
+.vjs-fluid {
+    padding-top: 56.25%; /* Maintain 16:9 aspect ratio */
+}
+
+.playlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.playlist-item:hover, .playlist-item.active {
+    background-color: #f0f0f0;
+}
+
+.playlist-item img {
+    width: 120px;
+    height: 70px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.playlist-item div {
+    flex-grow: 1;
+}
+
+.playlist-item span {
+    font-size: 14px;
+    color: #888;
+}
