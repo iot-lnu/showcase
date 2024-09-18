@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Home Assistant Kiosk
+Exec=/home/iotlab/app_showcase/start_app.sh
