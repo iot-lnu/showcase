@@ -10,7 +10,7 @@ sudo apt-get install -y git nodejs npm
 # git clone https://github.com/your-username/showcase.git
 
 # Install dependencies
-cd showcase/app
+cd app/
 npm install
 
 # Setup auto-launch
