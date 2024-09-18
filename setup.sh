@@ -12,3 +12,9 @@ sudo apt-get install -y git nodejs npm
 # Install dependencies
 cd showcase/app
 npm install
+
+# Setup auto-launch
+mkdir -p $HOME/.config/autostart
+cp showcase/app/integration/home-assistant.desktop $HOME/.config/autostart/home-assistant.desktop
+
+echo "Setup complete"
