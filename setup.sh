@@ -15,6 +15,6 @@ npm install
 
 # Setup auto-launch
 mkdir -p $HOME/.config/autostart
-cp app/integration/home-assistant.desktop $HOME/.config/autostart/home-assistant.desktop
+cp integration/home-assistant.desktop $HOME/.config/autostart/home-assistant.desktop
 
 echo "Setup complete, try rebooting the system"
