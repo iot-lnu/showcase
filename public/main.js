@@ -78,17 +78,16 @@ function handleVideoEnd() {
     }
 }
 
-// Load first video and render playlist on page load
-window.onload = () => {
-    fetch('/api/playlist')
-        .then(response => response.json())
-        .then(data => {
-            playlist = data;
-            loadVideo(playlist[0]);
-            renderPlaylist();
-            document.querySelector('.playlist-item').classList.add('active');
-        })
-        .catch(error => console.error('Error fetching playlist:', error));
+// Load playlist, first video, and render playlist on page load
+window.onload = async () => {
+    try {
+        playlist = await window.electronAPI.getVideos();
+        loadVideo(playlist[0]);
+        renderPlaylist();
+        document.querySelector('.playlist-item').classList.add('active');
+    } catch (error) {
+        console.error('Error loading playlist:', error);
+    }
 
     document.addEventListener('keydown', handleKeyboardControls);
     player.on('ended', handleVideoEnd);

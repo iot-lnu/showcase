@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session, globalShortcut } = require('electron');
+const { app, BrowserWindow, session, globalShortcut, ipcMain } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -90,8 +90,41 @@ function createHomeAssistantWindow() {
 }
 
 function createLocalAppWindow() {
-  localAppWindow = createWindow('http://localhost:8080', 'Local App');
-  localAppWindow.hide();
+  localAppWindow = new BrowserWindow({
+    fullscreen: true,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
+    },
+    backgroundColor: '#ffffff', // Change to white to see if it's loading
+    show: true, // Show the window immediately
+    frame: false
+  });
+
+  console.log('Loading local app from:', path.join(__dirname, 'public', 'index.html'));
+  localAppWindow.loadFile(path.join(__dirname, 'public', 'index.html'));
+
+  // Add error logging
+  localAppWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.error('Failed to load local app:', errorDescription);
+    logError(`Failed to load local app: ${errorDescription}`);
+  });
+
+  // Add console logging
+  localAppWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+    console.log('Renderer Console:', message);
+  });
+
+  // Handle IPC message for getting playlist
+  ipcMain.handle('get-playlist', () => {
+    return getPlaylist();
+  });
+
+  localAppWindow.once('ready-to-show', () => {
+    console.log('Window ready to show');
+    localAppWindow.show();
+  });
 }
 
 function switchWindow() {
@@ -182,6 +215,20 @@ app.on('activate', () => {
     createHomeAssistantWindow();
     createLocalAppWindow();
   }
+});
+
+ipcMain.handle('get-videos', () => {
+    const videoDir = path.join(__dirname, 'public', 'videos');
+    const files = fs.readdirSync(videoDir);
+    
+    return files
+        .filter(file => path.extname(file).toLowerCase() === '.mp4')
+        .map(file => ({
+            title: path.basename(file, '.mp4'),
+            description: `Video file: ${file}`,
+            src: `videos/${file}`,
+            thumbnail: `videos/${path.basename(file, '.mp4')}.jpg`
+        }));
 });
 
 app.on('will-quit', () => {
