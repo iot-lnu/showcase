@@ -15,6 +15,6 @@ npm install
 
 # Setup auto-launch
 mkdir -p $HOME/.config/autostart
-cp integration/home-assistant-kiosk.desktop $HOME/.config/autostart/home-assistant-kiosk.desktop
+cp ../integration/home-assistant-kiosk.desktop $HOME/.config/autostart/home-assistant-kiosk.desktop
 
 echo "Setup complete, try rebooting the system"
