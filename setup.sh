@@ -17,4 +17,4 @@ npm install
 mkdir -p $HOME/.config/autostart
 cp showcase/app/integration/home-assistant.desktop $HOME/.config/autostart/home-assistant.desktop
 
-echo "Setup complete"
+echo "Setup complete, try rebooting the system"
